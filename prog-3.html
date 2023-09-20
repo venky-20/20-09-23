@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Number Checker</title>
+</head>
+<body>
+    <h1>Happy Number Checker</h1>
+    <p>Enter a number to check if it's a happy number:</p>
+    <input type="number" id="numberInput">
+    <button onclick="checkHappyNumber()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        // Function to check if a number is a happy number
+        function isHappyNumber(n) {
+            const seen = new Set();
+
+            while (n !== 1 && !seen.has(n)) {
+                seen.add(n);
+                n = Array.from(String(n), Number).reduce((sum, digit) => sum + digit * digit, 0);
+            }
+
+            return n === 1;
+        }
+
+        // Function to handle the button click event
+        function checkHappyNumber() {
+            const numberInput = document.getElementById('numberInput');
+            const resultElement = document.getElementById('result');
+            const number = parseInt(numberInput.value);
+
+            if (isNaN(number)) {
+                resultElement.textContent = 'Please enter a valid number.';
+            } else {
+                const isHappy = isHappyNumber(number);
+                resultElement.textContent = isHappy
+                    ? `${number} is a happy number.`
+                    : `${number} is not a happy number.`;
+            }
+        }
+    </script>
+</body>
+</html>
