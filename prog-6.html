@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prime Number Finder</title>
+</head>
+<body>
+    <h1>Prime Number Finder</h1>
+    <p>Enter a range to find prime numbers:</p>
+    <input type="number" id="startRange" placeholder="Start Range">
+    <input type="number" id="endRange" placeholder="End Range">
+    <button onclick="findPrimeNumbers()">Find Primes</button>
+    <p id="result"></p>
+
+    <script>
+        function findPrimeNumbers() {
+            const startRange = parseInt(document.getElementById('startRange').value, 10);
+            const endRange = parseInt(document.getElementById('endRange').value, 10);
+
+            if (isNaN(startRange) || isNaN(endRange) || startRange >= endRange) {
+                document.getElementById('result').textContent = 'Please enter a valid range.';
+                return;
+            }
+
+            const primeNumbers = [];
+
+            for (let num = startRange; num <= endRange; num++) {
+                if (isPrime(num)) {
+                    primeNumbers.push(num);
+                }
+            }
+
+            if (primeNumbers.length === 0) {
+                document.getElementById('result').textContent = 'No prime numbers found in the given range.';
+            } else {
+                document.getElementById('result').textContent = 'Prime numbers in the given range: ' + primeNumbers.join(', ');
+            }
+        }
+
+        function isPrime(num) {
+            if (num <= 1) {
+                return false;
+            }
+            if (num <= 3) {
+                return true;
+            }
+            if (num % 2 === 0 || num % 3 === 0) {
+                return false;
+            }
+            let i = 5;
+            while (i * i <= num) {
+                if (num % i === 0 || num % (i + 2) === 0) {
+                    return false;
+                }
+                i += 6;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
