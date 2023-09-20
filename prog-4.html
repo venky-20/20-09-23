@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Element Frequency Counter</title>
+</head>
+<body>
+    <h1>Element Frequency Counter</h1>
+    <p>Enter elements separated by commas:</p>
+    <input type="text" id="inputArray" placeholder="Enter elements">
+    <button onclick="countElementFrequency()">Count Frequency</button>
+    <p id="result"></p>
+
+    <script>
+        function countElementFrequency() {
+            const inputArray = document.getElementById('inputArray').value;
+            
+            if (!inputArray) {
+                document.getElementById('result').textContent = 'Please enter elements.';
+                return;
+            }
+
+            const elements = inputArray.split(',').map(item => parseInt(item.trim()));
+
+            if (elements.some(isNaN)) {
+                document.getElementById('result').textContent = 'Invalid input. Please enter valid numbers separated by commas.';
+                return;
+            }
+
+            const frequencyMap = {};
+
+            for (const element of elements) {
+                if (frequencyMap[element]) {
+                    frequencyMap[element]++;
+                } else {
+                    frequencyMap[element] = 1;
+                }
+            }
+
+            const resultString = Object.entries(frequencyMap).map(([element, frequency]) => `${element}: ${frequency}`).join(', ');
+
+            document.getElementById('result').textContent = `Element frequencies: ${resultString}`;
+        }
+    </script>
+</body>
+</html>
