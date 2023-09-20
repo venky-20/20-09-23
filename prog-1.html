@@ -1,0 +1,33 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Disarium Number Checker</title>
+</head>
+<body>
+    <h1>Disarium Number Checker</h1>
+    <p>Enter a number to check if it's a Disarium number:</p>
+    <input type="number" id="inputNumber">
+    <button onclick="checkDisariumNumber()">Check</button>
+    <p id="result"></p>
+
+    <script>
+        function checkDisariumNumber() {
+            const num = document.getElementById('inputNumber').value;
+            if (isDisariumNumber(num)) {
+                document.getElementById('result').textContent = `${num} is a Disarium number.`;
+            } else {
+                document.getElementById('result').textContent = `${num} is not a Disarium number.`;
+            }
+        }
+
+        function isDisariumNumber(number) {
+            const numStr = number.toString();
+            let sum = 0;
+            for (let i = 0; i < numStr.length; i++) {
+                sum += Math.pow(parseInt(numStr[i], 10), i + 1);
+            }
+            return sum === number;
+        }
+    </script>
+</body>
+</html>
